@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-marketplace.json",
+  "name": "ai-act-check",
+  "description": "First-pass EU AI Act readiness check for small and medium businesses, as Claude skills.",
+  "owner": {
+    "name": "30Elevate",
+    "url": "https://30elevate.com"
+  },
+  "plugins": [
+    {
+      "name": "ai-act-check",
+      "displayName": "AI Act Check",
+      "source": "./",
+      "description": "Interviews the company, inventories its AI systems by role and risk tier, and produces a shareable gap report. A draft for human review - not legal advice.",
+      "author": {
+        "name": "30Elevate",
+        "url": "https://30elevate.com"
+      }
+    }
+  ]
+}

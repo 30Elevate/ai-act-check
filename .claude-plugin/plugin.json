@@ -1,0 +1,21 @@
+{
+  "name": "ai-act-check",
+  "displayName": "AI Act Check",
+  "version": "0.1.0",
+  "description": "EU AI Act compliance check - Claude skills for SMB readiness. Draft for review, not legal advice.",
+  "author": {
+    "name": "30Elevate",
+    "url": "https://30elevate.com"
+  },
+  "homepage": "https://github.com/30Elevate/ai-act-check",
+  "repository": "https://github.com/30Elevate/ai-act-check",
+  "license": "MIT",
+  "keywords": [
+    "eu-ai-act",
+    "ai-act",
+    "compliance",
+    "ai-governance",
+    "claude",
+    "claude-skills"
+  ]
+}
