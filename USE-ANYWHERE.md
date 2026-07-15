@@ -34,9 +34,9 @@ Role and risk tier are assessed **per system**. One company can be a provider of
 
 **Guided inference (suggest, don't assume).** From their business type, suggest the AI systems they probably run, and say plainly these are inferences from their description, not a scan of their systems:
 
-- E-commerce: support chatbot (Art. 50); recommendations (usually minimal); dynamic pricing / scoring (check higher); AI email marketing (Art. 50 labeling).
+- E-commerce: support chatbot (Art. 50 - if a model drives it, see below); recommendations (usually minimal); dynamic pricing / scoring (check higher); AI email marketing (copy written with AI needs **no** label - see scope below).
 - Recruitment / HR: CV screening / candidate ranking -> **high-risk (Annex III)**.
-- Marketing / agency: content and image/video generators -> Art. 50 labeling.
+- Marketing / agency: image/video generators -> label only where output could pass for authentic (deepfakes); ordinary AI-written copy needs no label.
 - Services / SaaS: in-app assistant; lead scoring / churn prediction (scoring of people -> check Annex III).
 - Clinic / finance: booking assistant; credit or risk scoring -> **high-risk (Annex III)**.
 
@@ -48,9 +48,14 @@ For each system, walk through:
 - **Risk tier**, checked in order:
   - **Prohibited (Art. 5)** - STOP if matched: social scoring by public authorities, subliminal/deceptive manipulation, exploiting vulnerabilities, untargeted facial-image scraping, emotion recognition at work/school, and similar. `[verify - Art. 5]`
   - **High-risk (Annex III)** - recruitment and worker management, individual credit scoring, education, essential services, biometrics, critical infrastructure, law enforcement, migration, justice. Heaviest obligations. `[verify - Annex III]`
-  - **Limited risk (Art. 50)** - chatbots talking to people, deepfakes, AI-generated content -> must disclose AI / label content. `[verify - Art. 50]`
+  - **Limited risk (Art. 50)** - chats talking to people, deepfakes, and a narrow slice of published text. Scope below - most AI-written business copy is **out**. `[verify - Art. 50]`
   - **Minimal** - everything else. No specific AI Act obligations.
-  - **GPAI** - only if they themselves provide a general-purpose model (rare for SMBs).
+  - **GPAI** - only if they themselves provide a general-purpose model (rare for SMBs). Note: **using** ChatGPT/Gemini/Claude does not give a business GPAI obligations - those sit with the model provider.
+
+**Art. 50 scope - the two traps.** Owners (and drafts) routinely overstate this. Correct it early:
+
+1. **Writing with AI does not trigger labelling.** Product descriptions, client emails, SEO articles, marketing posts written with AI need **no** label. Art. 50(4) covers only text published *to inform the public on matters of public interest* (health, fundamental rights, environment, consumer protection) - pure product advertising and corporate communications fall outside. There is also an exception where a human reviewed the content and holds documented editorial responsibility. What actually needs a label: **deepfakes** - material someone could reasonably take as authentic. Background swaps, cropping, colour correction do not. `[verify - Art. 50(4)]`
+2. **Not every chat is an AI system.** A chat running on rules a person wrote ("press 1 for opening hours") is **not** an AI system - Recital 12 excludes systems based solely on rules defined by natural persons. The deciding factor is whether the system **infers**. A language model composing its own answers does infer -> Art. 50(1) applies: tell the user it is AI, at the latest on first interaction (the "obvious from the circumstances" exception is narrow). Careful: Recital 12 also covers logic-/knowledge-based approaches that infer from encoded knowledge - the line is inference, not technology. `[verify - Recital 12]`
 
 Write role + one-sentence basis, and tier + one-sentence basis citing the article.
 

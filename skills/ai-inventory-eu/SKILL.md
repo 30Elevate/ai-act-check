@@ -38,9 +38,9 @@ This is a **suggestion layer, not a scan of reality** - say so out loud. Below i
 
 | Business | Likely AI systems | First flag |
 |---|---|---|
-| E-commerce / retail | support chatbot; product recommendations; dynamic pricing; AI in email marketing | chatbot -> Art. 50; pricing/scoring -> check Annex III |
+| E-commerce / retail | support chat; product recommendations; dynamic pricing; AI in email marketing | chat -> Art. 50 **only if a model drives it** (a rules-only menu is not an AI system); AI-written mail copy -> no label; pricing/scoring -> check Annex III |
 | Recruitment / HR | CV screening; candidate ranking; workforce monitoring | CV screening -> **high-risk** (Annex III) |
-| Marketing / agency | text generators; image/video generation; ad targeting | AI content -> Art. 50 labeling |
+| Marketing / agency | text generators; image/video generation; ad targeting | AI-written copy -> **no label**; synthetic faces/voices that could pass for real -> Art. 50 (deepfake) |
 | Services / SaaS | in-app assistant; lead scoring; churn prediction | scoring of people -> check Annex III |
 | Clinic / finance | booking assistant; credit or risk scoring | credit scoring -> **high-risk** (Annex III) |
 
@@ -71,7 +71,7 @@ Check in order. Summaries, not legal text - each tagged `[verify]` with the arti
 
 **B. High-risk (Annex III)** - heaviest obligations. Biometrics; critical infrastructure; education / vocational training; employment and worker management (recruitment, selection, promotion, termination, task allocation, monitoring); access to essential private and public services (public benefits, individual credit scoring, life / health insurance pricing, emergency dispatch); law enforcement; migration / asylum / border control; administration of justice and democratic processes. Note the matching area. `[verify - Annex III]`
 
-**C. Limited risk (Art. 50)** - chatbots talking to people, deepfakes, AI-generated content -> transparency duty: disclose it is AI / label the content. Applies from 2 Aug 2026. `[verify - Art. 50]`
+**C. Limited risk (Art. 50)** - transparency duty, applies from 2 Aug 2026. Two things trigger it: a chat that **infers** (a language model composing its own answers - a rules-only menu is not an AI system at all, Recital 12) and **deepfakes** (material someone could take as authentic). Text is in scope only when published to inform the public on matters of public interest - so ordinary AI-written business copy needs **no** label. Full scope: `references/eu-ai-act-notes.md`. `[verify - Art. 50]`
 
 **D. Minimal** - everything else. No specific AI Act obligations.
 

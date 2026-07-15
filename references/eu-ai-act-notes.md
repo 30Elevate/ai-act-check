@@ -40,7 +40,7 @@ Assessed per system, not per company. One company can be a provider of System A,
 
 - **Prohibited** (Art. 5) - STOP if present. Summaries, not the legal text: subliminal / deceptive techniques that materially distort behavior; exploiting vulnerabilities (age, disability, socio-economic status); social scoring by public authorities; real-time remote biometric identification in public spaces for law enforcement (narrow exceptions); biometric categorization inferring sensitive traits; emotion recognition at work or in education (medical / safety exceptions); untargeted facial-image scraping; predictive policing based solely on profiling. `[verify - Art. 5]`
 - **High-risk** (Annex III) - heaviest obligations. Areas: biometrics; critical infrastructure; education / vocational training; employment and worker management (recruitment, selection, promotion, termination, task allocation, monitoring); access to essential private and public services (public benefits, individual credit scoring, life / health insurance pricing, emergency dispatch); law enforcement; migration / asylum / border control; administration of justice and democratic processes. `[verify - Annex III]`
-- **Limited risk** (Art. 50) - transparency duty: tell people they are interacting with AI; label AI-generated / manipulated content. `[verify - Art. 50]`
+- **Limited risk** (Art. 50) - transparency duty: tell people they are interacting with AI; label deepfakes and the narrow slice of published text that informs the public on matters of public interest. Writing ordinary business copy with AI does **not** trigger a label, and a rules-only chat is not an AI system at all (Recital 12 - the test is inference). See "Art. 50 - what it does and does not cover" below. `[verify - Art. 50]`
 - **Minimal risk** - most uses (spam filters, recommendations, internal assistants). No specific AI Act obligations.
 - **GPAI** - general-purpose models; a separate obligations regime aimed at model providers. GPAI with systemic risk carries extra duties (e.g. models above a very high training-compute threshold, or designated by the Commission). `[verify - Art. 51 and surrounding]`
 
@@ -48,11 +48,41 @@ Assessed per system, not per company. One company can be a provider of System A,
 
 | Company situation | Likely class | Note |
 |---|---|---|
-| Website chatbot serving customers | Limited (Art. 50) | Must disclose it is AI `[verify]` |
-| AI-generated marketing content | Limited (Art. 50) | Label AI / manipulated content where required `[verify]` |
+| Website chat serving customers, driven by a language model | Limited (Art. 50) | Must disclose it is AI, at the latest on first interaction `[verify]` |
+| Website chat running on human-written rules ("press 1 for...") | **Not an AI system** | Recital 12 excludes rules-only systems - no Art. 50 duty `[verify - Recital 12]` |
+| Marketing copy / product descriptions written with AI | Minimal | **No label.** Writing with AI does not trigger Art. 50 `[verify - Art. 50(4)]` |
+| Synthetic faces, voices, or footage that could pass for real | Limited (Art. 50) | Deepfake - disclose it is artificially generated `[verify]` |
 | AI for CV screening / recruitment | High (Annex III) | Heaviest scope of obligations `[verify]` |
 | Customer scoring / creditworthiness | High (Annex III) | `[verify]` |
 | Internal AI assistant (notes, code) | Minimal | Usually no obligations `[verify]` |
+
+## Art. 50 - what it does and does not cover
+
+The single most over-claimed part of the Act. Two traps, both worth correcting before anything else.
+
+**Trap 1: writing with AI does not trigger labelling.** Product descriptions, client emails, SEO articles and marketing posts drafted with AI need **no** label. Art. 50(4) reaches only text published *to inform the public on matters of public interest* - health, fundamental rights, the environment, consumer protection, public administration. Pure product advertising and corporate communications sit outside it. A further exception applies where a person reviewed the content and holds **documented** editorial responsibility (a named owner and a real workflow - "someone glanced at it" does not qualify). Watch the edge: native advertising dressed as editorial on health or financial topics can fall back in scope. `[verify - Art. 50(4)]`
+
+What genuinely needs a label is the **deepfake** case: material a person could reasonably take as authentic - a face, a voice, footage of something that never happened. Background swaps, cropping and colour correction do not. `[verify - Art. 50(4)]`
+
+**Trap 2: not every chat is an AI system.** Recital 12 excludes "systems based on rules defined solely by natural persons to automatically execute operations". A menu chat ("press 1 for opening hours") is a form in disguise, not AI - Art. 50 never reaches it. The deciding property is the capability to **infer**; the Commission calls inference the key condition separating AI systems from other software. A language model composing answers nobody scripted does infer, so Art. 50(1) applies: tell the user it is AI, at the latest on first interaction. The "obvious from the circumstances" exception is narrow - a support chat mimicking a human conversation does not qualify. Careful with the simplification: Recital 12 also covers logic- and knowledge-based approaches that infer from encoded knowledge, so the line is **inference, not technology**. `[verify - Recital 12]`
+
+**Who carries the duty.** Art. 50 obligations sit with the **deployer** - the business running the system - not with the model vendor. Conversely, GPAI obligations (Art. 51-56) sit with the model provider: using ChatGPT, Gemini or Claude does not make a business a GPAI provider. `[verify - Art. 25, Art. 51]`
+
+## Penalties (Art. 99) - keep the tiers apart
+
+Headlines quote the top tier at everyone. It applies to almost no ordinary business.
+
+| Tier | What it covers |
+|---|---|
+| **EUR 35M / 7%** | **Prohibited practices only (Art. 5)** - social scoring, subliminal manipulation and the rest of the Art. 5 list. Not ordinary AI use. |
+| **EUR 15M / 3%** | Operator obligations: Art. 16, 22, 23, 24, 26, 31, 33, 34 **and Art. 50**. This is the tier a transparency breach lands in. |
+| **EUR 7.5M / 1%** | Supplying incorrect or misleading information to authorities. |
+
+- **SMEs: a fine is capped at the LOWER of the two values** (fixed amount or percentage of turnover), not the higher - Art. 99(6). Rarely mentioned, materially helpful.
+- **Art. 4 (AI literacy)** is **not** listed among the provisions carrying their own tier in Art. 99(4). Commentary splits: some treat it as an operator obligation under the 15M/3% tier, others see no direct sanction. Cautious, defensible line: no separate tier; literacy gaps weigh as a factor in other breaches, and a trained team counts in the company's favour. `[verify - Art. 99]`
+- Do **not** carry the phrase "no separate tier" over to Art. 50 - Art. 50 has one (15M/3%).
+
+`[verify]` all of the above against the consolidated text before relying on it in an engagement.
 
 ## To refine (legal backlog)
 
