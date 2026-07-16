@@ -1,7 +1,7 @@
 {
   "name": "ai-act-check",
   "displayName": "AI Act Check",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "EU AI Act compliance check - Claude skills for SMB readiness. Draft for review, not legal advice.",
   "author": {
     "name": "30Elevate",
