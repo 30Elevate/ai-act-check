@@ -1,0 +1,36 @@
+# Secrets - NEVER commit
+.env
+.env.*
+*.key
+*.pem
+secrets/
+**/credentials*
+**/*token*
+
+# Local agent / editor config
+.claude/
+CLAUDE.md.local
+
+# A user's own AI Act Check working data (profile, inventory) - never commit
+.ai-act-check/
+
+# Dependencies
+node_modules/
+__pycache__/
+*.pyc
+.venv/
+
+# System
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editors
+.vscode/
+.idea/
+*.swp
+
+# Local / scratch
+*.local
+scratch/
+tmp/
