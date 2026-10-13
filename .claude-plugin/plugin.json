@@ -9,6 +9,8 @@
   },
   "homepage": "https://github.com/30Elevate/ai-act-check",
   "repository": "https://github.com/30Elevate/ai-act-check",
+  "privacyPolicyUrl": "https://30elevate.com/en/privacy-policy",
+  "supportUrl": "https://github.com/30Elevate/ai-act-check/issues",
   "license": "MIT",
   "keywords": [
     "eu-ai-act",
