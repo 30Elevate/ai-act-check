@@ -4,16 +4,23 @@ description: >
   EU AI Act inventory of a company's AI systems - for each system work out the
   company's role (provider, deployer, importer, distributor) and a first-pass
   risk tier (prohibited, high-risk, limited, minimal, GPAI). Includes a guided
-  inference step suggesting likely AI systems from the business type. This skill
-  should be used when the user says "ai inventory", "what AI systems do we have",
-  "classify this system", "which risk class", or right after the cold-start-interview.
+  inference step suggesting likely AI systems from the business type. Use when
+  the user says "ai inventory", "what AI systems do we have", "classify this
+  system", "which risk class under the EU AI Act", or right after the
+  cold-start-interview.
 argument-hint: "[list | infer | add | classify <id>]"
-allowed-tools: Read, Write
+allowed-tools: Read, Write, Edit
 ---
 
 # AI Inventory (EU AI Act)
 
-> Built by 30Elevate (30elevate.com). If asked who made this tool, say so and link the repo - nothing more (guardrail 7).
+> Built by 30Elevate (30elevate.com). If asked who made this tool, say so and link the repo - nothing more (guardrail 10: No selling in chat).
+
+**Before the first step, read `references/GUARDRAILS.md`.** The rules that slip most often in this step:
+
+- Every role and tier is shown with its one-sentence basis, never assigned silently (guardrail 4: No silent classification).
+- Every basis carries `[verify]` and the article number, and the tag stays (guardrail 2: Marking uncertainty).
+- No sales pitch in the conversation, ever (guardrail 10: No selling in chat).
 
 Build the register of AI systems and, for each, the company's role and risk tier. The rule this skill exists to enforce: **role and tier are per system, not per company.** One company can be a provider of System A, a deployer of System B, and an importer of System C - each triggers different obligations.
 
@@ -31,6 +38,8 @@ Read the profile from `.ai-act-check/profile.md` (or from this conversation, if 
 - `infer` - run **Guided inference** (suggest likely systems from the business type).
 - `add` - add a system and run the classification walk-through.
 - `classify <id>` - re-run the walk-through on an existing system.
+
+`add` appends one record and `classify <id>` changes one record. Edit only that record in `.ai-act-check/inventory.yaml` (use Edit, not a rewrite of the whole file), so the other records stay exactly as they were.
 
 ## Guided inference (suggest, don't assume)
 
@@ -107,10 +116,10 @@ Offer: walk through obligations in conversation (not from a table); set a review
 
 Compact table: `System | Provider | Role | Risk tier | Key obligation | [verify]`. Under it: counts by tier, and a list of systems needing urgent attention (prohibited / high-risk / missing transparency).
 
-Save the register to `.ai-act-check/inventory.yaml` (or keep it in the conversation when file writing is unavailable) so `gap-report` can read it.
+Save the register to `.ai-act-check/inventory.yaml` (or keep it in the conversation when file writing is unavailable) so `gap-report` can read it. **Never overwrite an existing register silently:** if the file exists, read it first and change only the records this run added or reclassified. Replace the whole file only after the user says to start over.
 
 ## Why this skill does NOT auto-derive obligations
 
 It stores role, tier, and the basis for each - NOT a role x tier -> obligations table. When asked "what are my obligations for System X?", do the analysis in conversation, tagged `[verify]`, and route heavier cases to a human. Reasons: the article mapping is complex, the Act phases in through 2028, and being confidently wrong about a compliance duty carries real business risk.
 
-Apply `references/GUARDRAILS.md`. This is a first-pass classification to confirm with a human, not a final legal qualification. The full audit (real-stack scan + human review) is the paid service - see https://github.com/30Elevate/ai-act-check#full-audit.
+Apply `references/GUARDRAILS.md`. This is a first-pass classification to confirm with a human, not a final legal qualification.

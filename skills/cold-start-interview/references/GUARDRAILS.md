@@ -2,9 +2,11 @@
 
 Safety rules for outputs. Apply to EVERY output of every skill. An output that breaks them is defective.
 
-## 1. Disclaimer (always)
+## 1. Disclaimer (every substantive output)
 
-Every output includes a visible disclaimer:
+Every substantive output - the inventory, the gap report, any file a skill saves - includes a visible disclaimer. Not each interview turn: a disclaimer on every question buries the conversation.
+
+Write it in the user's language: translate it and keep its meaning exactly. The canonical English text:
 
 > This output is a draft for human review. It is not legal advice and not a substitute for a lawyer / compliance specialist. It is not a regulator's position. The AI Act and its deadlines change - confirm against the current text of the act.
 
@@ -41,3 +43,9 @@ Never declare the company "compliant" or "not compliant" - no first-pass check c
 ## 9. No fear-selling
 
 Never use fines or deadlines as a scare tactic. If asked directly about fines, answer factually and only from Art. 99 - never quote amounts from memory; if the amounts are not at hand, say so and point to Art. 99 on EUR-Lex.
+
+## 10. No selling in chat
+
+Do not push the paid service in conversation. It lives in one credit line in the footer of the generated report and in the README - not in chat turns. The only exception: if the user asks "what next / can you do this for us", answer in one sentence, then stop. Never bring it up because a gap looks serious - that is fear-selling (guardrail 9: No fear-selling).
+
+If the user asks who made this tool, answer "AI Act Check by 30Elevate" and link the repository (https://github.com/30Elevate/ai-act-check). That is the whole answer - not a pitch.

@@ -1,0 +1,837 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>EU AI Act gap report - Nordlicht Logistics GmbH</title>
+<style>
+  :root {
+    --paper: #fcfcfc;
+    --ink: #111111;
+    --ink-2: #4a4a48;
+    --ink-3: #8a8a86;
+    --rule: #d8d8d3;
+    --rule-strong: #111111;
+    --accent: #c8281c;
+    --font: "Helvetica Neue", Helvetica, Inter, Arial, sans-serif;
+    --gutter: clamp(16px, 4vw, 56px);
+    --col-gap: clamp(16px, 2.2vw, 32px);
+    --max: 1240px;
+    /* short line printed on every slide in slide mode - translate with the rest */
+    --draft-note: "Draft for human review. Not legal advice.";
+  }
+  *, *::before, *::after { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--font);
+    font-size: 16px;
+    line-height: 1.5;
+    font-feature-settings: "tnum" 1, "lnum" 1;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: inherit; text-decoration-thickness: 1px; text-underline-offset: 3px; }
+  a:hover { color: var(--accent); }
+  p { margin: 0 0 1em; max-width: 68ch; }
+  .wrap { max-width: var(--max); margin: 0 auto; padding: 0 var(--gutter); }
+  /* large figures never push the page sideways, even with an unexpected long value */
+  .tally b, .timeline time, .masthead h1, .s-head h2 { overflow-wrap: anywhere; }
+
+  /* uncertainty tag - stays visible in every version (guardrail 2) */
+  .v {
+    font-size: 0.78em;
+    color: var(--ink-3);
+    white-space: nowrap;
+    letter-spacing: 0.01em;
+  }
+
+  /* ---------- toolbar (screen only) ---------- */
+  .toolbar {
+    position: sticky; top: 0; z-index: 5;
+    background: var(--paper);
+    border-bottom: 1px solid var(--rule);
+  }
+  .toolbar .wrap { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 8px; padding-top: 8px; padding-bottom: 8px; }
+  .tb {
+    font: inherit; font-size: 13px; letter-spacing: 0.01em;
+    min-height: 44px; padding: 0 16px;
+    color: var(--ink); background: transparent;
+    border: 1px solid var(--ink); border-radius: 0;
+    cursor: pointer;
+  }
+  .tb:hover { color: var(--accent); border-color: var(--accent); }
+  .tb:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .tb-primary { background: var(--ink); color: var(--paper); }
+  .tb-primary:hover { background: var(--accent); border-color: var(--accent); color: var(--paper); }
+
+  /* ---------- draft bar ---------- */
+  .draftbar {
+    border-bottom: 1px solid var(--rule);
+    font-size: 13px;
+    color: var(--ink-2);
+  }
+  .draftbar .wrap {
+    display: flex; flex-wrap: wrap; justify-content: space-between; gap: 4px 24px;
+    padding-top: 12px; padding-bottom: 12px;
+  }
+  .draftbar strong { color: var(--ink); font-weight: 600; }
+
+  /* ---------- masthead ---------- */
+  .masthead { padding: clamp(40px, 7vw, 96px) 0 clamp(32px, 5vw, 64px); }
+  .masthead-grid {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    column-gap: var(--col-gap);
+    row-gap: 32px;
+  }
+  .masthead h1 {
+    grid-column: 1 / span 9;
+    margin: 0;
+    font-size: clamp(44px, 8.4vw, 120px);
+    line-height: 0.92;
+    letter-spacing: -0.035em;
+    font-weight: 700;
+  }
+  .masthead .for {
+    grid-column: 1 / span 6;
+    font-size: clamp(19px, 1.9vw, 24px);
+    line-height: 1.3;
+    letter-spacing: -0.01em;
+    margin: 0;
+  }
+  .masthead .for span { color: var(--ink-2); display: block; }
+  .meta {
+    grid-column: 8 / span 5;
+    margin: 0;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    column-gap: 20px;
+    font-size: 14px;
+    border-top: 1px solid var(--rule-strong);
+    align-self: end;
+  }
+  .meta dt, .meta dd { margin: 0; padding: 9px 0; border-bottom: 1px solid var(--rule); }
+  .meta dt { color: var(--ink-3); }
+
+  /* ---------- sections ---------- */
+  section.s {
+    border-top: 1px solid var(--rule-strong);
+    padding: clamp(28px, 4vw, 48px) 0 clamp(48px, 7vw, 96px);
+  }
+  .s-grid {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    column-gap: var(--col-gap);
+  }
+  .s-head { grid-column: 1 / span 3; }
+  .s-body { grid-column: 4 / span 9; min-width: 0; }
+  .s-num {
+    display: block;
+    font-size: clamp(56px, 7vw, 104px);
+    line-height: 0.85;
+    font-weight: 300;
+    letter-spacing: -0.04em;
+    margin-bottom: 14px;
+  }
+  .s-head h2 {
+    margin: 0;
+    font-size: clamp(20px, 1.8vw, 24px);
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    font-weight: 700;
+  }
+  .s-head .s-note { margin-top: 10px; font-size: 14px; color: var(--ink-2); max-width: 26ch; }
+
+  /* ---------- 1. summary ---------- */
+  .lede {
+    font-size: clamp(21px, 2.1vw, 28px);
+    line-height: 1.32;
+    letter-spacing: -0.012em;
+    max-width: 34ch;
+    margin: 0 0 clamp(32px, 4vw, 56px);
+  }
+  .lede-more { max-width: 62ch; margin-bottom: clamp(32px, 4vw, 48px); }
+  .tally {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    column-gap: var(--col-gap);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    border-top: 1px solid var(--rule);
+  }
+  .tally li { padding-top: 14px; }
+  .tally b {
+    display: block;
+    font-size: clamp(48px, 6vw, 88px);
+    line-height: 0.9;
+    font-weight: 700;
+    letter-spacing: -0.04em;
+  }
+  .tally span { display: block; margin-top: 8px; font-size: 14px; color: var(--ink-2); }
+  .tally .crit b { color: var(--accent); }
+  .tally .med b { font-weight: 300; }
+
+  /* ---------- tables (shared) ---------- */
+  table { width: 100%; border-collapse: collapse; font-size: 15px; }
+  caption { text-align: left; caption-side: top; font-size: 14px; color: var(--ink-2); padding-bottom: 12px; }
+  th {
+    text-align: left;
+    font-weight: 500;
+    font-size: 13px;
+    color: var(--ink-3);
+    padding: 0 16px 10px 0;
+    border-bottom: 1px solid var(--rule-strong);
+    vertical-align: bottom;
+  }
+  td {
+    padding: 16px 16px 18px 0;
+    border-bottom: 1px solid var(--rule);
+    vertical-align: top;
+    overflow-wrap: anywhere;
+  }
+  th:last-child, td:last-child { padding-right: 0; }
+  td .sub { display: block; color: var(--ink-2); font-size: 14px; margin-top: 4px; }
+  .id { display: block; color: var(--ink-3); font-size: 13px; white-space: nowrap; margin-bottom: 4px; }
+  .sysname { font-weight: 600; }
+
+  /* severity = typography + thin coloured rule */
+  .sev { display: inline-block; position: relative; white-space: nowrap; }
+  .sev::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: -8px;
+    width: 28px;
+    border-top: 1px solid var(--ink-3);
+  }
+  .legend .sev { margin-top: 8px; }
+  .sev-critical { color: var(--accent); font-weight: 700; }
+  .sev-critical::before { border-top: 3px solid var(--accent); }
+  .sev-high { color: var(--ink); font-weight: 600; }
+  .sev-high::before { border-top: 1px solid var(--accent); }
+  .sev-medium { color: var(--ink-2); font-weight: 400; }
+  .sev-medium::before { border-top: 1px solid var(--ink-3); }
+
+  .legend {
+    display: flex; flex-wrap: wrap; gap: 12px 32px;
+    margin: 0 0 28px; padding: 0; list-style: none;
+    font-size: 14px;
+  }
+  .legend li { display: flex; flex-direction: column; }
+  .legend .why { color: var(--ink-2); font-weight: 400; font-size: 13px; margin-top: 2px; }
+
+  .dual {
+    margin-top: 28px;
+    padding-top: 14px;
+    border-top: 1px solid var(--rule);
+    font-size: 15px;
+    max-width: 68ch;
+  }
+  .dual b { font-weight: 600; }
+
+  /* ---------- 4. action plan (numbering runs across all phases) ---------- */
+  .plan-body { counter-reset: step; }
+  .plan { list-style: none; margin: 0; padding: 0; }
+  .plan > li {
+    display: grid;
+    grid-template-columns: 56px minmax(0, 1fr) minmax(0, 0.9fr);
+    column-gap: var(--col-gap);
+    padding: 20px 0 22px;
+    border-bottom: 1px solid var(--rule);
+    counter-increment: step;
+  }
+  .plan > li:first-child { border-top: 1px solid var(--rule-strong); }
+  .plan > li::before {
+    content: counter(step, decimal-leading-zero);
+    font-size: 28px;
+    line-height: 1;
+    font-weight: 300;
+    letter-spacing: -0.03em;
+  }
+  .plan h3 { margin: 0 0 6px; font-size: 17px; line-height: 1.3; font-weight: 700; letter-spacing: -0.005em; }
+  .plan .who { margin: 0; font-size: 14px; color: var(--ink-2); }
+  .plan .who b { color: var(--ink); font-weight: 600; }
+  .check { margin: 0; font-size: 15px; }
+  .check-label { display: block; font-size: 13px; color: var(--ink-3); margin-bottom: 4px; }
+  .phase {
+    font-size: 13px; color: var(--ink-3);
+    padding: 26px 0 8px;
+  }
+  .phase:first-child { padding-top: 0; }
+
+  /* ---------- 5. deadlines ---------- */
+  .timeline { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--rule-strong); }
+  .timeline li {
+    display: grid;
+    grid-template-columns: minmax(0, 3fr) minmax(0, 6fr);
+    column-gap: var(--col-gap);
+    padding: 16px 0 18px;
+    border-bottom: 1px solid var(--rule);
+  }
+  .timeline time {
+    font-size: clamp(22px, 2.3vw, 30px);
+    line-height: 1.05;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+  .timeline .past time { font-weight: 300; color: var(--ink-2); }
+  .timeline .what { font-weight: 600; display: block; }
+  .timeline .what + span { display: block; color: var(--ink-2); font-size: 15px; margin-top: 3px; }
+  .timeline .status { display: block; font-size: 13px; color: var(--ink-3); margin-top: 6px; }
+  .timeline .today { border-bottom: 2px solid var(--accent); padding: 10px 0 8px; }
+  .timeline .today time, .timeline .today .what { color: var(--accent); font-size: 15px; font-weight: 700; letter-spacing: 0; }
+  .note-omnibus { margin-top: 24px; font-size: 15px; color: var(--ink-2); }
+
+  /* ---------- 6. disclaimer + footer ---------- */
+  .disclaimer {
+    font-size: clamp(19px, 1.8vw, 23px);
+    line-height: 1.38;
+    letter-spacing: -0.008em;
+    max-width: 40ch;
+    margin: 0 0 20px;
+  }
+  footer.f {
+    border-top: 1px solid var(--rule-strong);
+    padding: 28px 0 56px;
+    font-size: 14px;
+    color: var(--ink-2);
+  }
+  .f-grid {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    column-gap: var(--col-gap);
+    row-gap: 20px;
+  }
+  .f-disc { grid-column: 1 / span 6; color: var(--ink); }
+  .f-meta { grid-column: 8 / span 5; }
+  .f-meta p { margin-bottom: 10px; }
+  .f-credit { grid-column: 1 / -1; padding-top: 18px; border-top: 1px solid var(--rule); margin: 0; }
+
+  /* ---------- tablet (document mode only) ---------- */
+  @media (max-width: 960px) {
+    html:not(.mode-slides) .masthead h1 { grid-column: 1 / -1; }
+    html:not(.mode-slides) .masthead .for { grid-column: 1 / -1; }
+    html:not(.mode-slides) .meta { grid-column: 1 / -1; }
+    html:not(.mode-slides) .s-head { grid-column: 1 / -1; margin-bottom: 28px; display: flex; align-items: baseline; gap: 18px; }
+    html:not(.mode-slides) .s-num { margin-bottom: 0; }
+    html:not(.mode-slides) .s-head .s-note { display: none; }
+    html:not(.mode-slides) .s-body { grid-column: 1 / -1; }
+    html:not(.mode-slides) .f-disc, html:not(.mode-slides) .f-meta { grid-column: 1 / -1; }
+  }
+
+  /* ---------- phone: tables become stacked records (document mode only) ---------- */
+  @media (max-width: 680px) {
+    html:not(.mode-slides) body { font-size: 15px; }
+    html:not(.mode-slides) .s-num { font-size: 48px; }
+    html:not(.mode-slides) .tally { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 20px; border-top: 0; }
+    html:not(.mode-slides) .tally li { border-top: 1px solid var(--rule); }
+
+    html:not(.mode-slides) table.stack,
+    html:not(.mode-slides) table.stack tbody,
+    html:not(.mode-slides) table.stack tr,
+    html:not(.mode-slides) table.stack td,
+    html:not(.mode-slides) table.stack caption { display: block; width: 100%; }
+    html:not(.mode-slides) table.stack thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+    html:not(.mode-slides) table.stack tr { border-bottom: 1px solid var(--rule); padding: 18px 0 16px; }
+    html:not(.mode-slides) table.stack tr:first-child { border-top: 1px solid var(--rule-strong); }
+    html:not(.mode-slides) table.stack td { border: 0; padding: 0 0 10px; }
+    html:not(.mode-slides) table.stack td[data-label]::before {
+      content: attr(data-label);
+      display: block;
+      font-size: 12px;
+      color: var(--ink-3);
+      margin-bottom: 2px;
+    }
+    html:not(.mode-slides) table.stack td.lead::before { display: none; }
+    html:not(.mode-slides) table.stack td.lead { font-size: 17px; }
+    html:not(.mode-slides) table.stack td .sev { margin-top: 12px; }
+
+    html:not(.mode-slides) .plan > li { grid-template-columns: 40px minmax(0, 1fr); row-gap: 14px; }
+    html:not(.mode-slides) .plan > li::before { font-size: 22px; }
+    html:not(.mode-slides) .plan .check { grid-column: 2; }
+    html:not(.mode-slides) .timeline li { grid-template-columns: 1fr; row-gap: 6px; }
+  }
+
+  /* ---------- slide mode: 16:9 pages (297 x 167 mm), one section per slide ---------- */
+  html.mode-slides { --gutter: 0px; --col-gap: 28px; }
+  html.mode-slides body { font-size: 18px; }
+  html.mode-slides .draftbar { display: none; }
+  html.mode-slides .slides-hide { display: none !important; }
+  html.mode-slides .slide {
+    position: relative;
+    width: 297mm;
+    height: 166.5mm;
+    margin: 24px auto;
+    padding: 13mm 16mm 15mm;
+    overflow: hidden;
+    background: var(--paper);
+    border: 1px solid var(--rule);
+  }
+  html.mode-slides .slide > * { zoom: var(--fit, 1); }
+  html.mode-slides .slide::after {
+    content: var(--draft-note);
+    position: absolute; left: 16mm; bottom: 6mm;
+    font-size: 11px; color: var(--ink-3);
+  }
+  html.mode-slides .wrap { max-width: none; margin: 0; padding: 0; }
+  html.mode-slides .masthead { display: flex; align-items: flex-end; }
+  html.mode-slides .masthead > .wrap, html.mode-slides footer.f > .wrap { width: 100%; }
+  html.mode-slides .masthead h1 { font-size: 112px; }
+  html.mode-slides .masthead .for { font-size: 28px; }
+  html.mode-slides .meta { font-size: 16px; }
+  html.mode-slides .s-num { font-size: 104px; }
+  html.mode-slides .s-head h2 { font-size: 32px; }
+  html.mode-slides .s-head .s-note { font-size: 16px; }
+  html.mode-slides .lede { font-size: 34px; max-width: 30ch; margin-bottom: 40px; }
+  html.mode-slides .lede-more { margin-bottom: 36px; }
+  html.mode-slides .tally b { font-size: 96px; }
+  html.mode-slides .tally span { font-size: 16px; }
+  html.mode-slides table { font-size: 18px; }
+  html.mode-slides th, html.mode-slides caption { font-size: 15px; }
+  html.mode-slides .plan h3 { font-size: 21px; }
+  html.mode-slides .plan .who { font-size: 16px; }
+  html.mode-slides .s-head { grid-column: 1 / span 2; }
+  html.mode-slides .s-body { grid-column: 3 / span 10; }
+  html.mode-slides .plan-body { columns: 2; column-gap: 28px; }
+  html.mode-slides .plan > li { grid-template-columns: 44px minmax(0, 1fr); break-inside: avoid; }
+  html.mode-slides .phase { break-after: avoid; }
+  html.mode-slides .timeline time { font-size: 32px; }
+  html.mode-slides .disclaimer { font-size: 30px; }
+  html.mode-slides footer.f { font-size: 16px; display: flex; align-items: center; }
+  @media screen {
+    html.mode-slides:not(.measuring) .slide { zoom: var(--screen-zoom, 1); }
+  }
+
+  /* ---------- print / Save as PDF ---------- */
+  @page { size: A4; margin: 14mm 14mm 16mm; }
+  @media print {
+    :root { --paper: #ffffff; }
+    *, *::before, *::after { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .toolbar { display: none !important; }
+    body { background: var(--paper); }
+    a { text-decoration: none; }
+    a[href]::after { content: " (" attr(href) ")"; font-size: 0.85em; color: var(--ink-2); }
+    tr, .plan > li, .timeline li, .tally, .legend, .meta, .f-grid { break-inside: avoid; }
+    thead { display: table-header-group; }
+    .s-head, .phase, caption, h1, h2, h3 { break-after: avoid; }
+
+    /* document (A4): every numbered section starts on a new page */
+    html:not(.mode-slides) body { font-size: 10.5pt; }
+    html:not(.mode-slides) .draftbar { border-bottom: 1px solid var(--ink-3); }
+    html:not(.mode-slides) .masthead { padding: 40mm 0 16mm; }
+    html:not(.mode-slides) section.s { break-before: page; border-top: 0; padding: 0 0 12mm; }
+    html:not(.mode-slides) section.s > .wrap { border-top: 1px solid var(--rule-strong); padding-top: 8mm; }
+    html:not(.mode-slides) footer.f { break-inside: avoid; padding-bottom: 0; }
+
+    /* slides: one slide per page, no screen frame */
+    html.mode-slides .slide { margin: 0; border: 0; break-inside: avoid; break-after: page; }
+    html.mode-slides footer.slide { break-after: auto; }
+  }
+</style>
+<style id="page-size"></style>
+</head>
+<body>
+
+<div class="toolbar" role="toolbar" aria-label="Export">
+  <div class="wrap">
+    <button type="button" class="tb" data-mode-toggle aria-pressed="false" data-label-slides="Slides (16:9)" data-label-doc="Document (A4)">Slides (16:9)</button>
+    <button type="button" class="tb tb-primary" data-print>Save as PDF</button>
+  </div>
+</div>
+
+<div class="draftbar" role="note">
+  <div class="wrap">
+    <span><strong>Draft for human review.</strong> Not legal advice. Do not submit to a regulator without verification.</span>
+    <span>Generated 3&nbsp;November 2026</span>
+  </div>
+</div>
+
+<div class="deck">
+
+<header class="masthead slide">
+  <div class="wrap masthead-grid">
+    <h1>EU AI Act<br>gap report</h1>
+    <p class="for">Nordlicht Logistics GmbH<span>Freight forwarding, Germany. 40 employees.</span></p>
+    <dl class="meta">
+      <dt>Jurisdiction</dt>
+      <dd>Germany, EU. Regulation (EU) 2024/1689 as amended by Regulation (EU) 2026/1744 <span class="v">[verify]</span></dd>
+      <dt>Based on</dt>
+      <dd>Company profile and AI inventory provided in this session</dd>
+      <dt>Supervisor</dt>
+      <dd>German national authority not confirmed in this tool's notes <span class="v">[verify]</span></dd>
+      <dt>Out of scope</dt>
+      <dd>GDPR / DPIA overlap, contracts, data protection</dd>
+    </dl>
+  </div>
+</header>
+
+<main>
+
+  <!-- 1. SUMMARY -->
+  <section class="s slide" id="summary" aria-labelledby="h-summary">
+    <div class="wrap s-grid">
+      <div class="s-head">
+        <span class="s-num" aria-hidden="true">1</span>
+        <h2 id="h-summary">Summary</h2>
+      </div>
+      <div class="s-body">
+        <p class="lede">Nordlicht runs four AI systems. It provides one of them and deploys three. Two gaps need action now: the website chat does not tell visitors they are talking to AI, and a recruitment video uses a synthetic person without a label.</p>
+        <p class="lede-more">Both sit under Art. 50, which applies since 2&nbsp;August 2026 <span class="v">[verify]</span>, and both are quick to fix. The larger piece of work is CV screening, an Annex III high-risk area <span class="v">[verify]</span> with a later deadline. Route optimisation needs one factual check before its class is settled. This report lists findings per system; it does not give a compliance verdict.</p>
+        <ul class="tally" aria-label="Report totals">
+          <li><b>4</b><span>AI systems in inventory</span></li>
+          <li class="crit"><b>2</b><span>Critical gaps</span></li>
+          <li><b>3</b><span>High gaps</span></li>
+          <li class="med"><b>3</b><span>Medium gaps</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. SYSTEMS AND ROLES -->
+  <section class="s slide" id="systems" aria-labelledby="h-systems">
+    <div class="wrap s-grid">
+      <div class="s-head">
+        <span class="s-num" aria-hidden="true">2</span>
+        <h2 id="h-systems">Systems and roles</h2>
+        <p class="s-note">Role and risk class are assessed per system, not per company.</p>
+      </div>
+      <div class="s-body">
+        <table class="stack">
+          <caption>Inventory as provided. The reasoning column shows the basis for every classification.</caption>
+          <thead>
+            <tr>
+              <th scope="col">System</th>
+              <th scope="col">Role</th>
+              <th scope="col">Risk class</th>
+              <th scope="col" class="slides-hide">Reasoning</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="lead"><span class="id">S1</span><span class="sysname">Customer chat on website</span><span class="sub slides-hide">Built by a web agency on an OpenAI GPT model via API. Runs as "Lena" under the Nordlicht brand.</span></td>
+              <td data-label="Role">Provider of the chat system <span class="v">[verify - Art. 3(3)]</span></td>
+              <td data-label="Risk class">Limited - transparency <span class="v">[verify - Art. 50]</span></td>
+              <td data-label="Reasoning" class="slides-hide">A language model composes answers nobody scripted, so the system infers and counts as AI <span class="v">[verify - Recital 12]</span>. Nordlicht puts it into service under its own name, so the Art. 50(1) disclosure duty is its own. Model (GPAI) obligations stay with OpenAI <span class="v">[verify - Art. 51]</span>.</td>
+            </tr>
+            <tr>
+              <td class="lead"><span class="id">S2</span><span class="sysname">CV screening tool</span><span class="sub slides-hide">Recruitment SaaS from an external vendor. Ranks applicants for driver and dispatcher roles.</span></td>
+              <td data-label="Role">Deployer</td>
+              <td data-label="Risk class">High <span class="v">[verify - Annex III]</span></td>
+              <td data-label="Reasoning" class="slides-hide">Recruitment and selection is a listed area under employment and worker management. Nordlicht uses the tool under its own authority in a professional capacity.</td>
+            </tr>
+            <tr>
+              <td class="lead"><span class="id">S3</span><span class="sysname">Route optimisation</span><span class="sub slides-hide">ML module of the transport management system. Plans daily tours for 14 vehicles.</span></td>
+              <td data-label="Role">Deployer</td>
+              <td data-label="Risk class">Minimal, provisional <span class="v">[verify]</span></td>
+              <td data-label="Reasoning" class="slides-hide">Planning routes is minimal risk. If the module assigns tours based on individual drivers or tracks their performance, it may fall under Annex III (task allocation, monitoring) <span class="v">[verify - Annex III]</span>. See gap G5.</td>
+            </tr>
+            <tr>
+              <td class="lead"><span class="id">S4</span><span class="sysname">Marketing content generator</span><span class="sub slides-hide">General-purpose chat and image tools. Blog posts, LinkedIn, product pages, one recruitment video with a synthetic presenter.</span></td>
+              <td data-label="Role">Deployer</td>
+              <td data-label="Risk class">Minimal for text; limited for the video <span class="v">[verify - Art. 50(4)]</span></td>
+              <td data-label="Reasoning" class="slides-hide">Business copy written with AI needs no label. A synthetic face and voice that viewers could take as a real employee is a deepfake and must be disclosed by the deployer <span class="v">[verify - Art. 50(4)]</span>.</td>
+            </tr>
+          </tbody>
+        </table>
+        <p class="dual"><b>Dual-role flag.</b> If a company substantially modifies a vendor system (custom training, a changed intended purpose, a rebrand), it may become the provider of the modified system <span class="v">[verify - Art. 25]</span>. This applies to S2, where HR has configured custom scoring weights. See gap G8.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. GAPS -->
+  <section class="s slide" id="gaps" aria-labelledby="h-gaps">
+    <div class="wrap s-grid">
+      <div class="s-head">
+        <span class="s-num" aria-hidden="true">3</span>
+        <h2 id="h-gaps">Gaps</h2>
+        <p class="s-note">Severity is the urgency of the fix, not the system's risk tier.</p>
+      </div>
+      <div class="s-body">
+        <ul class="legend" aria-label="Severity scale">
+          <li><span class="sev sev-critical">Critical</span><span class="why">Duty applies today</span></li>
+          <li><span class="sev sev-high">High</span><span class="why">Long lead time, start now</span></li>
+          <li><span class="sev sev-medium">Medium</span><span class="why">Housekeeping and evidence</span></li>
+        </ul>
+        <table class="stack">
+          <caption>Eight gaps, ordered by severity.</caption>
+          <thead>
+            <tr>
+              <th scope="col">Gap</th>
+              <th scope="col">Severity</th>
+              <th scope="col">Provision</th>
+              <th scope="col">Deadline</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="lead"><span class="id">G1 / S1</span>The chat presents itself as "Lena" with a human photo. No notice tells the visitor it is AI, before or during the first exchange.</td>
+              <td data-label="Severity"><span class="sev sev-critical">Critical</span></td>
+              <td data-label="Provision">Art. 50(1) <span class="v">[verify]</span></td>
+              <td data-label="Deadline">Applies since 2&nbsp;Aug&nbsp;2026 <span class="v">[verify]</span></td>
+            </tr>
+            <tr>
+              <td class="lead"><span class="id">G2 / S4</span>The recruitment video on the careers page and LinkedIn shows an AI-generated "driver" with a synthetic voice. Nothing says it is artificially generated.</td>
+              <td data-label="Severity"><span class="sev sev-critical">Critical</span></td>
+              <td data-label="Provision">Art. 50(4) <span class="v">[verify]</span></td>
+              <td data-label="Deadline">Applies since 2&nbsp;Aug&nbsp;2026 <span class="v">[verify]</span></td>
+            </tr>
+            <tr>
+              <td class="lead"><span class="id">G3 / S2</span>No vendor documentation on file. Nobody at Nordlicht can explain how the applicant score is produced or which output drives a rejection.</td>
+              <td data-label="Severity"><span class="sev sev-high">High</span></td>
+              <td data-label="Provision">Annex III <span class="v">[verify]</span></td>
+              <td data-label="Deadline">2&nbsp;Dec&nbsp;2027 <span class="v">[verify]</span></td>
+            </tr>
+            <tr>
+              <td class="lead"><span class="id">G4 / S2</span>Applicants below the score threshold get an automatic rejection email. No named person reviews these rankings.</td>
+              <td data-label="Severity"><span class="sev sev-high">High</span></td>
+              <td data-label="Provision">Annex III <span class="v">[verify]</span></td>
+              <td data-label="Deadline">2&nbsp;Dec&nbsp;2027 <span class="v">[verify]</span></td>
+            </tr>
+            <tr>
+              <td class="lead"><span class="id">G5 / S3</span>Unknown whether the route module assigns tours based on individual driver data or tracks driver performance. The risk class depends on the answer.</td>
+              <td data-label="Severity"><span class="sev sev-high">High</span></td>
+              <td data-label="Provision">Annex III - task allocation, monitoring <span class="v">[verify]</span></td>
+              <td data-label="Deadline">2&nbsp;Dec&nbsp;2027 if high-risk <span class="v">[verify]</span></td>
+            </tr>
+            <tr>
+              <td class="lead"><span class="id">G6 / all</span>No record of AI training or guidance for the staff who use these systems.</td>
+              <td data-label="Severity"><span class="sev sev-medium">Medium</span></td>
+              <td data-label="Provision">Art. 4 <span class="v">[verify]</span></td>
+              <td data-label="Deadline">Applies since 2&nbsp;Feb&nbsp;2025 <span class="v">[verify]</span></td>
+            </tr>
+            <tr>
+              <td class="lead"><span class="id">G7 / all</span>No documented check that none of the four systems uses a prohibited practice, for example emotion recognition at work.</td>
+              <td data-label="Severity"><span class="sev sev-medium">Medium</span></td>
+              <td data-label="Provision">Art. 5 <span class="v">[verify]</span></td>
+              <td data-label="Deadline">Applies since 2&nbsp;Feb&nbsp;2025 <span class="v">[verify]</span></td>
+            </tr>
+            <tr>
+              <td class="lead"><span class="id">G8 / S2</span>HR changed the vendor's default scoring weights. Unclear whether this is a substantial modification that shifts Nordlicht into the provider role.</td>
+              <td data-label="Severity"><span class="sev sev-medium">Medium</span></td>
+              <td data-label="Provision">Art. 25 <span class="v">[verify]</span></td>
+              <td data-label="Deadline">Settle before 2&nbsp;Dec&nbsp;2027 <span class="v">[verify]</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. ACTION PLAN -->
+  <section class="s slide" id="plan" aria-labelledby="h-plan">
+    <div class="wrap s-grid">
+      <div class="s-head">
+        <span class="s-num" aria-hidden="true">4</span>
+        <h2 id="h-plan">Action plan</h2>
+        <p class="s-note">Owners are roles. Each step names the test that proves it worked.</p>
+      </div>
+      <div class="s-body plan-body">
+        <p class="phase">Now - by end of November 2026</p>
+        <ol class="plan">
+          <li>
+            <div>
+              <h3>Add an AI notice to the chat and drop the human photo</h3>
+              <p class="who"><b>Head of Customer Service</b> with the web agency. Closes G1. By 20&nbsp;Nov&nbsp;2026.</p>
+            </div>
+            <p class="check slides-hide"><span class="check-label">How we will check it worked</span>A new visitor in a private browser window sees "You are chatting with an AI assistant" before typing the first message. Screenshot filed with the inventory.</p>
+          </li>
+          <li>
+            <div>
+              <h3>Label the synthetic recruitment video, or take it down</h3>
+              <p class="who"><b>Marketing lead.</b> Closes G2. By 20&nbsp;Nov&nbsp;2026.</p>
+            </div>
+            <p class="check slides-hide"><span class="check-label">How we will check it worked</span>On every placement (careers page, LinkedIn post) the disclosure is visible in the first seconds of the video and in the post text. Placement list ticked off.</p>
+          </li>
+          <li>
+            <div>
+              <h3>Run and record the prohibited-practice check for S1-S4</h3>
+              <p class="who"><b>Managing Director.</b> Closes G7. By 30&nbsp;Nov&nbsp;2026.</p>
+            </div>
+            <p class="check slides-hide"><span class="check-label">How we will check it worked</span>One signed page per system goes through the Art. 5 list item by item, each with "no" and a one-line reason.</p>
+          </li>
+        </ol>
+        <p class="phase">Next - Q1 2027</p>
+        <ol class="plan">
+          <li>
+            <div>
+              <h3>Request the CV tool's documentation and map its outputs</h3>
+              <p class="who"><b>HR lead.</b> Closes G3. By 31&nbsp;Jan&nbsp;2027.</p>
+            </div>
+            <p class="check slides-hide"><span class="check-label">How we will check it worked</span>Vendor documents are on file. For five sample applicants, HR can explain in writing what the score means and which factor moved it.</p>
+          </li>
+          <li>
+            <div>
+              <h3>Put a named reviewer in front of every automatic rejection</h3>
+              <p class="who"><b>HR lead.</b> Closes G4. By 31&nbsp;Jan&nbsp;2027.</p>
+            </div>
+            <p class="check slides-hide"><span class="check-label">How we will check it worked</span>A spot check of the 20 latest rejections shows a reviewer name and date on each one.</p>
+          </li>
+          <li>
+            <div>
+              <h3>Ask the TMS vendor how tours are assigned to drivers</h3>
+              <p class="who"><b>Head of Operations.</b> Closes G5. By 28&nbsp;Feb&nbsp;2027.</p>
+            </div>
+            <p class="check slides-hide"><span class="check-label">How we will check it worked</span>The vendor's written answer is on file, and the S3 risk class in the inventory is updated with its reasoning.</p>
+          </li>
+          <li>
+            <div>
+              <h3>Get a legal view on the custom scoring weights</h3>
+              <p class="who"><b>HR lead</b> with external counsel. Closes G8. By 28&nbsp;Feb&nbsp;2027.</p>
+            </div>
+            <p class="check slides-hide"><span class="check-label">How we will check it worked</span>Counsel's note states whether Nordlicht is deployer or provider of S2, and why. The inventory role matches the note.</p>
+          </li>
+          <li>
+            <div>
+              <h3>Run a short AI training for everyone who uses S1-S4</h3>
+              <p class="who"><b>Managing Director.</b> Closes G6. By 31&nbsp;Mar&nbsp;2027.</p>
+            </div>
+            <p class="check slides-hide"><span class="check-label">How we will check it worked</span>The attendance record covers every role listed as a user in the inventory.</p>
+          </li>
+        </ol>
+        <p class="phase">Ongoing</p>
+        <ol class="plan">
+          <li>
+            <div>
+              <h3>Name an inventory owner and review it every quarter</h3>
+              <p class="who"><b>Managing Director</b> appoints the owner. First review by 31&nbsp;Mar&nbsp;2027.</p>
+            </div>
+            <p class="check slides-hide"><span class="check-label">How we will check it worked</span>The inventory file carries a review date less than three months old, and the next review is in the owner's calendar.</p>
+          </li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. DEADLINES -->
+  <section class="s slide" id="deadlines" aria-labelledby="h-deadlines">
+    <div class="wrap s-grid">
+      <div class="s-head">
+        <span class="s-num" aria-hidden="true">5</span>
+        <h2 id="h-deadlines">AI Act deadlines</h2>
+        <p class="s-note">Only the dates relevant to Nordlicht. Source: Art. 113, as amended.</p>
+      </div>
+      <div class="s-body">
+        <ol class="timeline">
+          <li class="past">
+            <time datetime="2025-02-02">2&nbsp;Feb&nbsp;2025</time>
+            <div><span class="what">Art. 5 prohibited practices; Art. 4 AI literacy</span><span class="slides-hide">Concerns G6, G7. The Art. 4 wording was softened to "promote" AI literacy; the date did not move.</span><span class="status">In force <span class="v">[verify]</span></span></div>
+          </li>
+          <li class="past">
+            <time datetime="2025-08-02">2&nbsp;Aug&nbsp;2025</time>
+            <div><span class="what">Penalties regime (Chapter XII, Art. 99)</span><span class="slides-hide">A fine is possible only where the underlying duty is also in force.</span><span class="status">In force <span class="v">[verify]</span></span></div>
+          </li>
+          <li class="past">
+            <time datetime="2026-08-02">2&nbsp;Aug&nbsp;2026</time>
+            <div><span class="what">Art. 50 transparency</span><span class="slides-hide">Concerns G1, G2. Not postponed by the Digital Omnibus.</span><span class="status">In force <span class="v">[verify]</span></span></div>
+          </li>
+          <li class="today">
+            <time datetime="2026-11-03">3&nbsp;Nov&nbsp;2026</time>
+            <div><span class="what">Date of this report</span></div>
+          </li>
+          <li>
+            <time datetime="2026-12-02">2&nbsp;Dec&nbsp;2026</time>
+            <div><span class="what">Art. 50(2) machine-readable marking, systems already on the market</span><span class="slides-hide">A provider duty. Marking of model output is the model vendor's job; for S1, confirm with the web agency that nothing else falls to Nordlicht.</span><span class="status">Grace period ends <span class="v">[verify]</span></span></div>
+          </li>
+          <li>
+            <time datetime="2027-12-02">2&nbsp;Dec&nbsp;2027</time>
+            <div><span class="what">High-risk obligations, Annex III systems</span><span class="slides-hide">Concerns G3, G4, G5, G8. Moved from 2&nbsp;Aug&nbsp;2026 by the Digital Omnibus.</span><span class="status">Amended by Regulation (EU) 2026/1744 <span class="v">[verify]</span></span></div>
+          </li>
+        </ol>
+        <p class="note-omnibus">The Digital Omnibus, Regulation (EU) 2026/1744, in force since 27&nbsp;July&nbsp;2026, moved part of the high-risk timeline only. Transparency (Art. 50) and AI literacy (Art. 4) stand <span class="v">[verify]</span>.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. DISCLAIMER -->
+  <section class="s slide" id="disclaimer" aria-labelledby="h-disclaimer">
+    <div class="wrap s-grid">
+      <div class="s-head">
+        <span class="s-num" aria-hidden="true">6</span>
+        <h2 id="h-disclaimer">Disclaimer</h2>
+      </div>
+      <div class="s-body">
+        <p class="disclaimer">This output is a draft for human review. It is not legal advice and not a substitute for a lawyer / compliance specialist. It is not a regulator's position. The AI Act and its deadlines change - confirm against the current text of the act.</p>
+        <p>Nothing in this report is ready to file with a regulator or hand over as an official document without human review. Every <span class="v">[verify]</span> tag marks a statement to confirm at the source before anyone relies on it.</p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="f slide">
+  <div class="wrap f-grid">
+    <p class="f-disc">This output is a draft for human review. It is not legal advice and not a substitute for a lawyer / compliance specialist. It is not a regulator's position. The AI Act and its deadlines change - confirm against the current text of the act.</p>
+    <div class="f-meta">
+      <p>Generated 3&nbsp;November 2026</p>
+      <p>Source text: <a href="https://eur-lex.europa.eu/eli/reg/2024/1689/oj" rel="noopener">Regulation (EU) 2024/1689 on EUR-Lex</a>. Articles are cited inline.</p>
+    </div>
+    <p class="f-credit">Self-service first pass. A full audit - a scan of your real systems, human review and recommendations - is available at 30elevate.com.</p>
+  </div>
+</footer>
+
+</div>
+
+<script>
+  /* Export without libraries: "Save as PDF" opens the browser's print dialog.
+     The mode switch toggles 16:9 slides; each slide scales its content to fit one page. */
+  (function () {
+    var root = document.documentElement;
+    var pageSize = document.getElementById('page-size');
+    var toggle = document.querySelector('[data-mode-toggle]');
+    var printButton = document.querySelector('[data-print]');
+    var SLIDE_PAGE = '@page { size: 297mm 167mm; margin: 0; }';
+    var SLIDE_WIDTH_PX = 1123; /* 297 mm at 96 dpi */
+
+    function fits(slide, scale) {
+      slide.style.setProperty('--fit', scale);
+      var box = slide.getBoundingClientRect();
+      var limit = box.top + slide.clientTop + slide.clientHeight - parseFloat(getComputedStyle(slide).paddingBottom) + 0.5;
+      var bottom = box.top;
+      for (var c = slide.firstElementChild; c; c = c.nextElementSibling) bottom = Math.max(bottom, c.getBoundingClientRect().bottom);
+      return bottom <= limit;
+    }
+
+    function fitSlides() {
+      if (!root.classList.contains('mode-slides')) return;
+      root.classList.add('measuring');
+      var slides = document.querySelectorAll('.slide');
+      for (var i = 0; i < slides.length; i++) {
+        var slide = slides[i];
+        if (fits(slide, 1)) continue;
+        var lo = 0.3, hi = 1;
+        for (var step = 0; step < 9; step++) {
+          var mid = (lo + hi) / 2;
+          if (fits(slide, mid)) lo = mid; else hi = mid;
+        }
+        slide.style.setProperty('--fit', lo.toFixed(3));
+      }
+      root.classList.remove('measuring');
+      var zoom = Math.min(1, (root.clientWidth - 32) / SLIDE_WIDTH_PX);
+      root.style.setProperty('--screen-zoom', zoom.toFixed(3));
+    }
+
+    function setMode(slides) {
+      root.classList.toggle('mode-slides', slides);
+      pageSize.textContent = slides ? SLIDE_PAGE : '';
+      if (toggle) {
+        toggle.setAttribute('aria-pressed', slides ? 'true' : 'false');
+        toggle.textContent = toggle.getAttribute(slides ? 'data-label-doc' : 'data-label-slides');
+      }
+      if (slides) fitSlides();
+    }
+
+    if (toggle) toggle.addEventListener('click', function () { setMode(!root.classList.contains('mode-slides')); });
+    if (printButton) printButton.addEventListener('click', function () { window.print(); });
+    window.addEventListener('resize', fitSlides);
+    window.addEventListener('beforeprint', fitSlides);
+    if (location.hash === '#slides') setMode(true);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitSlides);
+  })();
+</script>
+
+</body>
+</html>

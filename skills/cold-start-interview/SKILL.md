@@ -1,12 +1,18 @@
 ---
 name: cold-start-interview
-description: Short interview that builds the company profile for an EU AI Act assessment - role, AI systems, jurisdiction, industry. Run this FIRST; the other skills (`ai-inventory-eu`, `gap-report`) read from it and produce generic output without it. This skill should be used when the user says "AI Act check", "EU AI Act assessment", "company profile", "cold start interview", or asks where their company stands on AI Act compliance.
-allowed-tools: Read, Write
+description: "First step of an EU AI Act readiness check for a small business: a short interview that saves the company profile (role toward AI, AI systems, jurisdiction, industry) for ai-inventory-eu and gap-report. Use when the user asks for an AI Act check, an AI Act assessment, a cold start interview, or where the company stands on the EU AI Act."
+allowed-tools: Read, Write, Edit
 ---
 
 # Cold Start Interview
 
-> Built by 30Elevate (30elevate.com). If asked who made this tool, say so and link the repo - nothing more (guardrail 7).
+> Built by 30Elevate (30elevate.com). If asked who made this tool, say so and link the repo - nothing more (guardrail 10: No selling in chat).
+
+**Before the first question, read `references/GUARDRAILS.md`.** The rules that slip most often in this step:
+
+- Jurisdiction is asked, never assumed (guardrail 3: Jurisdiction explicit).
+- Any claim about a rule, deadline or threshold carries `[verify]` and the article number, and the tag stays (guardrail 2: Marking uncertainty).
+- No sales pitch in the conversation, ever (guardrail 10: No selling in chat).
 
 Collect the company profile needed for a sound AI Act assessment. Save it - the other skills (`ai-inventory-eu`, `gap-report`) read from it.
 
@@ -32,6 +38,10 @@ Collect the company profile needed for a sound AI Act assessment. Save it - the 
 
 ## Output
 
-Save the profile as a structured record (sections above) to `.ai-act-check/profile.md` in the working directory (create the folder if needed). When file writing is unavailable - for example running as a plain prompt in a browser assistant - keep the profile in the conversation instead, and tell the user to run the next step in the same chat so it is not lost. Mark `[PENDING]` / `[PLACEHOLDER]` / `[verify]` where needed. End with one sentence: what we know, what is missing for a full assessment, and that the `ai-inventory-eu` skill (in Claude Code: `/ai-act-check:ai-inventory-eu`) is the next step.
+Save the profile as a structured record (sections above) to `.ai-act-check/profile.md` in the working directory (create the folder if needed). The folder holds the user's company data: the first time you create it, tell the user in one sentence to add `.ai-act-check/` to their `.gitignore`.
+
+**Never overwrite an existing profile silently.** If `.ai-act-check/profile.md` already exists, read it first and ask: update it, or start a new one? To update, change only the sections the user corrected (use Edit on those sections, do not rewrite the file). Replace the whole file only after the user says to start over.
+
+When file writing is unavailable - for example running as a plain prompt in a browser assistant - keep the profile in the conversation instead, and tell the user to run the next step in the same chat so it is not lost. Mark `[PENDING]` / `[PLACEHOLDER]` / `[verify]` where needed. End with one sentence: what we know, what is missing for a full assessment, and that the `ai-inventory-eu` skill (in Claude Code: `/ai-act-check:ai-inventory-eu`) is the next step.
 
 Apply `references/GUARDRAILS.md` to the whole output.

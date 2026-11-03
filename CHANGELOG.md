@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.2.0 - 2026-11-03
+
+- "No selling in chat" is now guardrail 10 in `guardrails/GUARDRAILS.md`, so a skill installed on its own carries it too. Before, it lived only in `AGENTS.md`, and the skills pointed to "guardrail 7", which is the rule on sensitive data.
+- Guardrail 1 now holds the 0.1.7 disclaimer fix the skills read: translated into the user's language, in substantive outputs only, not in every interview turn. Until now only `USE-ANYWHERE.md` had it.
+- Every skill starts by reading the guardrails and names the two or three rules that slip most often in that step. References use the form "guardrail N: Title".
+- The gap report is filled into a fixed template (`skills/gap-report/assets/report-template.html`) instead of being designed from scratch: same layout, one EUR-Lex link, disclaimer and credit line built in. It saves to `.ai-act-check/gap-report.html`; without file access, the HTML comes back in a code block. The skill re-reads the guardrails before writing the report, as 0.1.2 intended.
+- The report exports without libraries through the browser's print dialog: an A4 document (one section per page) or 16:9 slides (one section per slide, scaled to fit).
+- `profile.md` and `inventory.yaml` are no longer overwritten silently: the skills ask first and edit only the section or record that changed (`Edit` added to `allowed-tools`).
+- Skill descriptions narrowed: "what are my AI Act gaps", "which risk class under the EU AI Act", no more "company profile".
+- README: plain-language first paragraph, the no-install path first, a sample report for a fictional company (`assets/`), the date of the last legal review, and the full-audit link pointing to the AI Trust Layer page.
+- `USE-ANYWHERE.md`: the whole prompt sits in one code block, so GitHub shows one copy button.
+- CI without an LLM (`.github/workflows/check.yml`): `sync-skills.mjs --check` plus `scripts/check.mjs` - frontmatter, paths, guardrail references, AI Act dates across the notes, the prompt and the skills, and the report template. Scenarios for manual runs in `evals/README.md`.
+- Typo fixed in the Poland note (`eu-ai-act-notes.md`).
+
 ## 0.1.7 - 2026-10-12
 
 - `USE-ANYWHERE.md` says what the quick pass covers (role, jurisdiction, whether AI is used) against the full one, as the `cold-start-interview` skill already did.

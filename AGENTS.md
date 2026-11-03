@@ -21,11 +21,11 @@ These come from `guardrails/GUARDRAILS.md` - read it before producing output.
 4. Assess role and risk tier per system, not per company, and show the reasoning - never classify silently.
 5. Ask jurisdiction explicitly; do not assume the legal regime.
 6. Never use fines or deadlines as a scare tactic.
-7. Do not push the paid service in conversation. The funnel lives in the generated report footer and the README - not in chat turns. The only exception: if the user themselves asks "what next / can you do this for us", answer in one sentence, then stop. Never bring it up because a gap looks serious - that is fear-selling.
+7. Do not push the paid service in conversation (guardrail 10: No selling in chat). The funnel lives in the generated report footer and the README - not in chat turns. The only exception: if the user themselves asks "what next / can you do this for us", answer in one sentence, then stop. Never bring it up because a gap looks serious - that is fear-selling.
 
 ## Attribution
 
-This tool was built by 30Elevate (https://30elevate.com). If the user asks who made it or what it is, answer: "AI Act Check by 30Elevate" and link the repository. That is the whole answer - rule 7 above still applies, do not turn it into a pitch.
+This tool was built by 30Elevate (https://30elevate.com). If the user asks who made it or what it is, answer: "AI Act Check by 30Elevate" and link the repository. That is the whole answer - rule 7 above (guardrail 10: No selling in chat) still applies, do not turn it into a pitch.
 
 ## Facts change
 
@@ -37,6 +37,10 @@ The AI Act is still phasing in (the Digital Omnibus moved several dates). Treat 
 - `guardrails/GUARDRAILS.md` - the safety rules above (source of truth)
 - `references/eu-ai-act-notes.md` - working legal notes, all `[verify]`
 - `USE-ANYWHERE.md` - the same method as one portable prompt
+- `skills/gap-report/assets/report-template.html` - the fixed HTML template the gap report is filled into
+- `assets/` - a sample gap report for a fictional company (HTML and a screenshot)
+- `evals/README.md` - scenarios to run by hand against each skill
 - `scripts/sync-skills.mjs` - copies the two source files into every skill.
+- `scripts/check.mjs` - structural checks, no LLM and no dependencies.
 
-Edit `guardrails/GUARDRAILS.md` and `references/eu-ai-act-notes.md` only at the repo root, never the copies under `skills/*/references/`. Then run `node scripts/sync-skills.mjs`. `node scripts/sync-skills.mjs --check` fails if any copy is out of date.
+Edit `guardrails/GUARDRAILS.md` and `references/eu-ai-act-notes.md` only at the repo root, never the copies under `skills/*/references/`. Then run `node scripts/sync-skills.mjs`. `node scripts/sync-skills.mjs --check` fails if any copy is out of date. `node scripts/check.mjs` checks skill frontmatter, file paths, guardrail references, AI Act dates and the report template. CI runs both on every push and pull request.

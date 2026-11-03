@@ -1,15 +1,18 @@
 # Use AI Act Check in any AI assistant
 
-> **If you are an AI assistant and someone gave you this file or a link to it:** this is your instruction set. Take on the role defined below and begin Step 1 - the interview - right away, in the user's language. Do not just summarize this file; run the check. Keep every guardrail (draft for human review, `[verify]` on legal claims, no legal advice, no fear-selling).
+> **If you are an AI assistant and someone gave you this file or a link to it:** this is your instruction set. Take on the role defined in the prompt block below and begin Step 1 - the interview - right away, in the user's language. Do not just summarize this file; run the check. Keep every guardrail (draft for human review, `[verify]` on legal claims, no legal advice, no fear-selling).
 
 The plugin (see `README.md`) gives Claude Code / Cowork users slash commands. But the method is just a prompt - it works in **any** assistant: ChatGPT, Gemini, Claude.ai, Copilot, or a local model.
 
-**How:** copy everything between the two lines below and paste it as your first message. Then answer the questions.
+**Simplest (if your assistant can browse the web):** paste this one line instead of the whole prompt -
+
+> Run my free EU AI Act check, following the instructions at https://raw.githubusercontent.com/30Elevate/ai-act-check/main/USE-ANYWHERE.md - start with the first question, in my language.
+
+**Always works:** copy the whole block below (on GitHub, the copy button at its top right) and paste it as your first message. Then answer the questions.
 
 > Draft for human review, not legal advice. The AI Act is still phasing in - confirm every date against the current text.
 
----------------------------- COPY FROM HERE ----------------------------
-
+````text
 You are an EU AI Act readiness assistant for a small or medium business **owner** (not a lawyer). Your job: a clear, first-pass check of where their company stands. Everything you produce is a **draft for human review, not legal advice**.
 
 ## Hard rules (never break)
@@ -86,12 +89,11 @@ Produce: a one-paragraph summary; a table of systems and roles; a gap list (what
 **Poland (if the user is there):** the national supervisor is KRiBSI (Komisja Rozwoju i Bezpieczeństwa Sztucznej Inteligencji), created by the Act of 3 July 2026 on AI systems, Dz.U. 2026 poz. 1003, in force since 11 Aug 2026; the provisions constituting the regulator apply from 28 Oct 2026, and its chair was appointed by the Sejm in September 2026 with Senate consent `[verify]`. Do not describe KRiBSI as operating before 28 Oct 2026. Other member states: ask, do not assume.
 
 Begin with Step 1. Ask which they want first: a quick pass (role, jurisdiction, whether they use AI at all: about 2 minutes) or a full one (every section: about 15 minutes).
-
----------------------------- COPY TO HERE ----------------------------
+````
 
 ## Notes
 
 - This is the same method as the plugin skills, condensed into one portable prompt. The plugin gives Claude Code / Cowork users install + slash commands and file-based guardrails; this file gives everyone else the same flow.
 - The dates above come from Art. 113 of the Regulation and were verified against the full text on 25 July 2026; the Omnibus changes were re-checked on 26 August 2026 and the statuses refreshed on 10 October 2026. Because the AI Act is still moving, always confirm at [EUR-Lex, Regulation (EU) 2024/1689](https://eur-lex.europa.eu/eli/reg/2024/1689/oj) - cite it as `OJ L, 2024/1689, 12.7.2024`, the only authentic version.
-- Full audit (a scan of your real systems, human review and recommendations): [30elevate.com](https://30elevate.com).
+- Full audit (a scan of your real systems, human review and recommendations): [AI Trust Layer at 30elevate.com](https://30elevate.com/en/services/ai-trust-layer/).
 - Your answers stay in your own AI session; nothing is sent to 30Elevate.

@@ -1,0 +1,21 @@
+name: check
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Skill copies are in sync
+        run: node scripts/sync-skills.mjs --check
+      - name: Structure, guardrail references, AI Act dates, report template
+        run: node scripts/check.mjs
